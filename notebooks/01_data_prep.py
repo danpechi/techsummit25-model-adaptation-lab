@@ -13,6 +13,7 @@
 # COMMAND ----------
 
 # MAGIC %pip install -r ../requirements.txt
+# MAGIC %pip install tiktoken
 # MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
@@ -22,9 +23,9 @@
 
 # COMMAND ----------
 
-uc_target_catalog = "msh"
+uc_target_catalog = "dpechi"
 uc_target_schema = "test"
-uc_volume_path = "/Volumes/msh/finreg/data"
+uc_volume_path = "/Volumes/dpechi/finreg/data"
 
 # COMMAND ----------
 
@@ -64,6 +65,10 @@ if (locals().get("uc_target_catalog") is None
 
 # COMMAND ----------
 
+uc_volume_path
+
+# COMMAND ----------
+
 docs_df = load_and_clean_data(uc_volume_path)
 display(docs_df) # noqa
 
@@ -85,3 +90,7 @@ display(splitted_df) # noqa
 # COMMAND ----------
 
 splitted_df.write.mode("overwrite").saveAsTable(f"{uc_target_catalog}.{uc_target_schema}.splitted_documents")
+
+# COMMAND ----------
+
+

@@ -35,7 +35,7 @@ from finreganalytics.utils import get_spark, get_user_name, batchify
 
 # COMMAND ----------
 
-uc_target_catalog = "msh"
+uc_target_catalog = "dpechi"
 uc_target_schema = "test"
 
 if (locals().get("uc_target_catalog") is None
@@ -299,4 +299,12 @@ qa_ift_val_df.write.mode("overwrite").saveAsTable(f"{uc_target_catalog}.{uc_targ
 
 # COMMAND ----------
 
+f"{uc_target_catalog}.{uc_target_schema}.qa_instructions_val"
+
+# COMMAND ----------
+
 display(get_spark().read.table(f"{uc_target_catalog}.{uc_target_schema}.qa_instructions_val"))  # noqa
+
+# COMMAND ----------
+
+

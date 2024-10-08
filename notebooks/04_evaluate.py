@@ -29,8 +29,8 @@ from finreganalytics.utils import get_spark, get_user_name
 
 # COMMAND ----------
 
-uc_target_catalog = "msh"
-uc_target_schema = "finreg2"
+uc_target_catalog = "dpechi"
+uc_target_schema = "test"
 
 if (locals().get("uc_target_catalog") is None
         or locals().get("uc_target_schema") is None):
@@ -107,3 +107,7 @@ eval_results = evaluate_qa_chain(
 )
 print(f"See evaluation metrics below: \n{eval_results.metrics}")
 display(eval_results.tables["eval_results_table"])  # noqa
+
+# COMMAND ----------
+
+

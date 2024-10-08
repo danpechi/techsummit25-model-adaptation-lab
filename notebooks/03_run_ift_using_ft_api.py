@@ -34,8 +34,9 @@ from finreganalytics.utils import setup_logging, get_dbutils, get_current_cluste
 
 setup_logging()
 
-uc_target_catalog = "msh"
+uc_target_catalog = "dpechi"
 uc_target_schema = "test"
+n = 3
 
 if (locals().get("uc_target_catalog") is None
         or locals().get("uc_target_schema") is None):
@@ -69,9 +70,9 @@ cluster_id = get_current_cluster_id()
 
 run = fm.create(
     model=base_model,
-    train_data_path=f"{uc_target_catalog}.{uc_target_schema}.qa_instructions_train",
-    eval_data_path=f"{uc_target_catalog}.{uc_target_schema}.qa_instructions_val",
-    register_to=f"{uc_target_catalog}.{uc_target_schema}.fin_reg_model_test",
+    train_data_path=f"{uc_target_catalog}.{uc_target_schema}.qa_instructions_train{n}",
+    eval_data_path=f"{uc_target_catalog}.{uc_target_schema}.qa_instructions_val{n}",
+    register_to=f"{uc_target_catalog}.{uc_target_schema}.fin_reg_model_test{n}",
     training_duration=training_duration,
     learning_rate=learning_rate,
     task_type="CHAT_COMPLETION",
@@ -81,6 +82,8 @@ run = fm.create(
 # COMMAND ----------
 
 display(fm.get_events(run))
+#previously: train 0.985, .762 token accuracy eval
+#worse: train 0.79, .797 token eval accuracy
 
 # COMMAND ----------
 
@@ -89,3 +92,7 @@ run.name
 # COMMAND ----------
 
 display(fm.list())
+
+# COMMAND ----------
+
+
